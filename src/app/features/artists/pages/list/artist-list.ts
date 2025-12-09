@@ -1,22 +1,20 @@
 import {Component, computed, inject, signal} from '@angular/core';
-import {JsonPipe} from '@angular/common';
 import {Artist, ArtistsService} from '../../services/artists.service';
-import {BehaviorSubject, combineLatest, map, Observable} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-artist-list',
   standalone: true,
   imports: [
     FormsModule
   ],
-  templateUrl: './index.html',
-  styleUrl: './index.css',
+  templateUrl: './artist-list.html',
+  styleUrl: './artist-list.css',
 })
 
 
-export class ArtistsPage {
+export class ArtistList {
   private _artistsService = inject(ArtistsService);
   artists = signal<Artist[]>([]);
   search = signal('');
