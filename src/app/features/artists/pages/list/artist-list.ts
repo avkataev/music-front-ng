@@ -1,13 +1,15 @@
 import {Component, computed, inject, signal} from '@angular/core';
 import {Artist, ArtistsService} from '../../services/artists.service';
 import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
 
 
 @Component({
   selector: 'app-artist-list',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './artist-list.html',
   styleUrl: './artist-list.css',
