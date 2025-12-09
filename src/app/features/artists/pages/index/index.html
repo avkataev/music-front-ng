@@ -28,7 +28,15 @@
         required
       />
     </div>
-    <pre>{{filteredArtists() | json}}</pre>
+    <div>
+      @for (artist of filteredArtists(); track artist.id) {
+        <div
+          class="block border border-gray-300 rounded-lg p-2 mt-2 cursor-pointer hover:bg-gray-100"
+        >
+          <div>{{ artist.title }} ({{artist.dateStart}})</div>
+        </div>
+      }
+    </div>
     <div>
     </div>
 

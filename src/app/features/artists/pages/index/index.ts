@@ -9,7 +9,6 @@ import {FormsModule} from '@angular/forms';
   selector: 'app-index',
   standalone: true,
   imports: [
-    JsonPipe,
     FormsModule
   ],
   templateUrl: './index.html',
