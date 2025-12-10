@@ -31,9 +31,19 @@ export class ArtistList {
     this.search.set(term);
   }
 
-  constructor() {
+  onRemove(id: number) {
+    this._artistsService.remove(id).subscribe({
+      next: () => this.getArtists(),
+      error: (err) => console.error(err)
+    })
+  }
+
+  getArtists() {
     this._artistsService.findAll()
       .subscribe((artists: any) => this.artists.set(artists));
+  }
+  constructor() {
+    this.getArtists()
   }
 
 }

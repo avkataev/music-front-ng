@@ -1,41 +1,59 @@
 <div>
   <div>
-    <div class="relative">
-      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-        <svg
-          class="w-4 h-4 text-gray-500 dark:text-gray-400"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 20 20"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-          />
-        </svg>
+    <div class="flex gap-4">
+      <div class="relative w-full">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg
+            class="w-4 h-4 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+        </div>
+        <input
+          [(ngModel)]="searchInput"
+          (ngModelChange)="onSearch($event)"
+          type="search"
+          id="default-search"
+          class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Search Mockups, Logos..."
+          required
+        />
       </div>
-      <input
-        [(ngModel)]="searchInput"
-        (ngModelChange)="onSearch($event)"
-        type="search"
-        id="default-search"
-        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-        placeholder="Search Mockups, Logos..."
-        required
-      />
+      <a [routerLink]="['/artists', 'create']" type="submit" class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+        Создать
+      </a>
     </div>
     <div>
-      @for (artist of filteredArtists(); track artist.id) {
-        <a
-          [routerLink]="['/artists', artist.id]"
-          class="block border border-gray-300 rounded-lg p-2 mt-2 cursor-pointer hover:bg-gray-100"
-        >
-          <div>{{ artist.title }} ({{artist.dateStart}})</div>
-        </a>
+      @if (filteredArtists().length) {
+        @for (artist of filteredArtists(); track artist.id) {
+          <div class="flex mt-2">
+            <a
+              [routerLink]="['/artists', artist.id]"
+              class="w-full block border border-gray-300 rounded-l-lg p-2 cursor-pointer hover:bg-gray-100"
+            >
+              <div>{{ artist.title }} ({{ artist.dateStart }})</div>
+            </a>
+            <button type="button" (click)="onRemove(artist.id)" class="flex items-center bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-r-lg focus:outline-none focus:shadow-outline">
+              X
+            </button>
+          </div>
+        }
+      } @else {
+        <div class="mt-4 text-lg">{{
+          !artists().length
+            ? 'Исполнители отсутствуют, самое время создать нового:)'
+            : 'Исполнитель с таким имем не найден'
+        }}</div>
       }
     </div>
     <div>
