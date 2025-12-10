@@ -26,7 +26,7 @@ export class ArtistsService {
   findById(id: number) {
     return this.http.get<Artist>(environment.apiUrl + 'artist/' + id)
   }
-  remove(id: number): Observable<void> {
-    return this.http.delete<void>(environment.apiUrl + 'artist/' + id);
+  remove(id: number): Observable<Artist> {
+    return this.http.delete<Artist>(environment.apiUrl + 'artist/' + id);
   }
 }

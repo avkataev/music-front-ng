@@ -2,6 +2,8 @@ import {Component, computed, inject, signal} from '@angular/core';
 import {Artist, ArtistsService} from '../../services/artists.service';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
+import {NotificationService} from '../../../notifications/services/notifications.service';
+import {tap} from 'rxjs';
 
 
 @Component({
@@ -27,23 +29,36 @@ export class ArtistList {
     )
   );
 
+  constructor(private notifications: NotificationService) {
+    this.getArtists()
+  }
+
   onSearch(term: string) {
     this.search.set(term);
   }
 
   onRemove(id: number) {
-    this._artistsService.remove(id).subscribe({
-      next: () => this.getArtists(),
-      error: (err) => console.error(err)
-    })
+    this._artistsService.remove(id)
+      .subscribe({
+        next: (data) => {
+          this.notifications.show({
+            type: 'success',
+            message: `${data.title} успешно удален`,
+          });
+          this.getArtists()
+        },
+        error: (err) => console.error(err)
+      })
+
+  }
+
+  showToast() {
+
   }
 
   getArtists() {
     this._artistsService.findAll()
       .subscribe((artists: any) => this.artists.set(artists));
-  }
-  constructor() {
-    this.getArtists()
   }
 
 }
