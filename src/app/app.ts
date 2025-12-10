@@ -1,9 +1,13 @@
 import {Component, DOCUMENT, inject, OnInit, signal} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {RouterOutlet} from '@angular/router';
+import {NotificationComponent} from './features/notifications/components/notification/notification';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    NotificationComponent,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
