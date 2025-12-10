@@ -1,3 +1,68 @@
 <div>
+  <app-my-card>
+    <form (submit)="onSubmit($event)" class="grid grid-cols-[1fr_1fr] gap-4">
+      @for (field of artistField; track field.value) {
+        <div>
+          <label
+            [for]="field.value"
+            class="block text-gray-700 text-sm font-bold mb-2"
+          >
+            {{field.label}}
+          </label>
+          @switch (field.type) {
+            @case ('text') {
+              <input
+                [field]="artistForm[field.value]!"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                [ngClass]="{
+                  'border-red-500': artistForm[field.value]!().touched() && artistForm[field.value]!().invalid()
+                }"
+                [id]="field.value"
+                type="text"
+                [placeholder]="field.placeholder"
+              >
+            }
+            @case ('number') {
+              <input
+                [field]="artistForm[field.value]!"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                [ngClass]="{
+                  'border-red-500': artistForm[field.value]!().touched() && artistForm[field.value]!().invalid()
+                }"
+                [id]="field.value"
+                type="text"
+                [placeholder]="field.placeholder"
+              >
+            }
+            @case ('textarea') {
+              <textarea
+                [field]="artistForm[field.value]!"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline h-30"
+                [ngClass]="{
+                  'border-red-500': artistForm[field.value]!().touched() && artistForm[field.value]!().invalid()
+                }"
+                [id]="field.value"
+                [placeholder]="field.placeholder"
+              ></textarea>
+            }
+            @default {
+              <div>Неизвестное поле, обратитьесь в поддержку</div>
+            }
+          }
 
+          @if (artistForm[field.value]!().invalid() && artistForm[field.value]!().touched()) {
+            @for (error of artistForm[field.value]!().errors(); track error) {
+              <div class="mt-2 text-red-500">{{ error.message }}</div>
+            }
+          }
+        </div>
+      }
+
+      <div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Создать
+        </button>
+      </div>
+    </form>
+  </app-my-card>
 </div>

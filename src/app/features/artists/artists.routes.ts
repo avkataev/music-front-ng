@@ -14,12 +14,12 @@ export const artistsRoutes: Routes = [
         component: ArtistList
       },
       {
-        path: 'artists/:id',
-        component: ArtistDetail
-      },
-      {
         path: 'artists/create',
         component: ArtistCreate
+      },
+      {
+        path: 'artists/:id',
+        component: ArtistDetail
       },
     ]
   },
