@@ -1,6 +1,7 @@
-import {delay, map, Observable, of} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../environment/environment';
 
 export interface Artist {
   id: number;
@@ -17,12 +18,12 @@ export interface Artist {
 })
 export class ArtistsService {
   constructor(private http: HttpClient) {}
+
   findAll() {
-    return this.http.get<Artist[]>('assets/data/artists.json')
+    return this.http.get<Artist[]>(environment.apiUrl + 'artist')
   }
-  findById(id: number): Observable<Artist | undefined> {
-    return this.findAll().pipe(
-      map(artists => artists.find(a => a.id === id))
-    );
+
+  findById(id: number) {
+    return this.http.get<Artist>(environment.apiUrl + 'artist/' + id)
   }
 }

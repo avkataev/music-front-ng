@@ -12,7 +12,6 @@ import {RouterLink} from '@angular/router';
     RouterLink
   ],
   templateUrl: './artist-list.html',
-  styleUrl: './artist-list.css',
 })
 
 

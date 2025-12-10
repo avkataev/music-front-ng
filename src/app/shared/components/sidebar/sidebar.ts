@@ -7,7 +7,6 @@ import {RouterLink} from '@angular/router';
     RouterLink
   ],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css',
 })
 export class Sidebar {
   routes = [

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ArtistList } from './pages/list/artist-list';
 import { ArtistDetail } from './pages/detail/artist-detail';
 import {MainLayout} from '../../layouts/main-layout/main-layout';
+import {ArtistCreate} from './pages/create/artist-create';
 
 export const artistsRoutes: Routes = [
   {
@@ -15,6 +16,10 @@ export const artistsRoutes: Routes = [
       {
         path: 'artists/:id',
         component: ArtistDetail
+      },
+      {
+        path: 'artists/create',
+        component: ArtistCreate
       },
     ]
   },
