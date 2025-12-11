@@ -2,16 +2,7 @@ import {map, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environment/environment';
-
-export interface Artist {
-  id: number;
-  title: string;
-  dateStart: number;
-  genres: string[]
-  countries: string[]
-  cities: string[]
-  description: string
-}
+import {ArtistCreateRequest, ArtistResponse, ArtistUpdateRequest} from '../models/artist.api';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +11,18 @@ export class ArtistsService {
   constructor(private http: HttpClient) {}
 
   findAll() {
-    return this.http.get<Artist[]>(environment.apiUrl + 'artist')
+    return this.http.get<ArtistResponse[]>(environment.apiUrl + 'artist')
   }
-
   findById(id: number) {
-    return this.http.get<Artist>(environment.apiUrl + 'artist/' + id)
+    return this.http.get<ArtistResponse>(environment.apiUrl + 'artist/' + id)
   }
-  remove(id: number): Observable<Artist> {
-    return this.http.delete<Artist>(environment.apiUrl + 'artist/' + id);
+  remove(id: number): Observable<ArtistResponse> {
+    return this.http.delete<ArtistResponse>(environment.apiUrl + 'artist/' + id);
+  }
+  create(artist: ArtistCreateRequest): Observable<ArtistResponse> {
+    return this.http.post<ArtistResponse>(environment.apiUrl + 'artist', artist)
+  }
+  update(id: number, artist: ArtistUpdateRequest): Observable<ArtistResponse> {
+    return this.http.put<ArtistResponse>(environment.apiUrl + 'artist/' + id, artist)
   }
 }

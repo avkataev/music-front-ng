@@ -1,7 +1,8 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Artist, ArtistsService} from '../../services/artists.service';
+import {ArtistsService} from '../../services/artists.service';
 import {MyCard} from '../../../../shared/components/my-card/my-card';
+import {Artist} from '../../models/artist.model';
 
 @Component({
   selector: 'app-artist-detail',

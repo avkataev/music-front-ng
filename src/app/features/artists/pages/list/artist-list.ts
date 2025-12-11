@@ -1,9 +1,10 @@
 import {Component, computed, inject, signal} from '@angular/core';
-import {Artist, ArtistsService} from '../../services/artists.service';
+import {ArtistsService} from '../../services/artists.service';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {NotificationService} from '../../../notifications/services/notifications.service';
 import {tap} from 'rxjs';
+import {Artist} from '../../models/artist.model';
 
 
 @Component({
@@ -49,10 +50,6 @@ export class ArtistList {
         },
         error: (err) => console.error(err)
       })
-
-  }
-
-  showToast() {
 
   }
 
