@@ -1,23 +1,15 @@
-<div class="bg-white p-5 rounded-xl shadow-sm">
-
-  @if (header || headerAfter) {
-    <div
-      class="mb-5 flex items-center justify-between"
-    >
-      @if (header) {
-        <div
-          class="text-2xl font-bold"
-        >
-          <ng-content select="[header]">{{header}}</ng-content>
-        </div>
-      }
-      @if (headerAfter) {
-        <div>
-          <ng-content select="[header-after]">{{headerAfter}}</ng-content>
-        </div>
-      }
-    </div>
-
-  }
-  <ng-content></ng-content>
-</div>
+@if (header) {
+  <div
+    class="mb-5 flex items-center justify-between"
+  >
+    @if (header) {
+      <div
+        class="text-2xl font-bold"
+      >
+        <ng-content select="[header]">{{header}}</ng-content>
+      </div>
+    }
+    <ng-content select="[headerAfter]">{{headerAfter}}</ng-content>
+  </div>
+}
+<ng-content></ng-content>

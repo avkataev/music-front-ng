@@ -1,9 +1,9 @@
 <div>
   @if (artist()) {
-    <div class="mb-5 grid grid-cols-[400px_1fr_60px] gap-5">
+    <div class="mb-5 grid grid-cols-[400px_1fr_60px] grid-rows-[80px_1fr] gap-5">
       <app-my-card class="row-span-2">
         <div class="rounded-xl overflow-hidden shadow-sm">
-          <!--<img src="https://placehold.co/400x300" width="400" height="300" alt="Фото">-->
+          <img src="https://placehold.co/400x300" width="400" height="300" alt="Фото">
         </div>
       </app-my-card>
       <app-my-card>
@@ -18,36 +18,35 @@
     </div>
     <div class="grid grid-cols-[400px_1fr] gap-5">
       <app-my-card header="Concerts">
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
+        <div>Скоро здесь появяться концерты</div>
       </app-my-card>
       <app-my-card header="History">
         {{ artist()?.description }}
       </app-my-card>
       <app-my-card header="Top songs">
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
+        <div>Скоро здесь появяться треки</div>
       </app-my-card>
       <app-my-card header="Discography">
-        <div class="flex gap-2">
+        <div headerAfter class="italic">
+          All · Studio · Single · Live
+        </div>
+        <div class="flex gap-4">
+          <img src="https://placehold.co/120x120" width="120" height="120" alt="Фото">
+          <img src="https://placehold.co/120x120" width="120" height="120" alt="Фото">
+          <img src="https://placehold.co/120x120" width="120" height="120" alt="Фото">
+          <img src="https://placehold.co/120x120" width="120" height="120" alt="Фото">
         </div>
       </app-my-card>
       <app-my-card header="News">
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
+        <div>Скоро здесь появяться новости</div>
       </app-my-card>
       <app-my-card header="Photo">
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-          nulla pariatur. Excepteur sint occaecat cupidatat non proident. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit, sed do eiusmod tempor incididunt.
+        <div class="flex gap-4">
+          <img src="https://placehold.co/90x90" width="90" height="90" alt="Фото">
+          <img src="https://placehold.co/90x90" width="90" height="90" alt="Фото">
+          <img src="https://placehold.co/90x90" width="90" height="90" alt="Фото">
+          <img src="https://placehold.co/90x90" width="90" height="90" alt="Фото">
+          <img src="https://placehold.co/90x90" width="90" height="90" alt="Фото">
         </div>
       </app-my-card>
       <app-my-card>
