@@ -1,7 +1,7 @@
 import {Component, computed, inject, signal} from '@angular/core';
 import {ArtistsService} from '../../services/artists.service';
 import {FormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NotificationService} from '../../../notifications/services/notifications.service';
 import {tap} from 'rxjs';
 import {Artist} from '../../models/artist.model';
@@ -30,7 +30,7 @@ export class ArtistList {
     )
   );
 
-  constructor(private notifications: NotificationService) {
+  constructor(private notifications: NotificationService, private router: Router) {
     this.getArtists()
   }
 
@@ -38,6 +38,9 @@ export class ArtistList {
     this.search.set(term);
   }
 
+  onEdit(id: number) {
+    this.router.navigate(['/artists', id, 'edit'])
+  }
   onRemove(id: number) {
     this._artistsService.remove(id)
       .subscribe({
@@ -50,7 +53,6 @@ export class ArtistList {
         },
         error: (err) => console.error(err)
       })
-
   }
 
   getArtists() {
