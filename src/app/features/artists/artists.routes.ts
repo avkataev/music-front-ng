@@ -7,23 +7,23 @@ import {ArtistEdit} from './pages/edit/artist-edit';
 
 export const artistsRoutes: Routes = [
   {
-    path: '',
+    path: 'artists',
     component: MainLayout,
     children: [
       {
-        path: 'artists',
+        path: '',
         component: ArtistList
       },
       {
-        path: 'artists/create',
+        path: 'create',
         component: ArtistCreate
       },
       {
-        path: 'artists/:id/edit',
+        path: ':id/edit',
         component: ArtistEdit
       },
       {
-        path: 'artists/:id',
+        path: ':id',
         component: ArtistDetail
       },
     ]

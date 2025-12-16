@@ -4,11 +4,11 @@ import {MyCard} from '../../../../shared/components/my-card/my-card';
 import {NgClass} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {ArtistsService} from '../../services/artists.service';
-import {ArtistField, ArtistFieldType} from '../../models/artist.field';
 import {ArtistFormDto} from '../../models/artistFormDto';
 import {mapArtistFormToArtistRequest, mapArtistResponseToArtistForm} from '../../mappers/artist.mappers';
 import {NotificationService} from '../../../notifications/services/notifications.service';
 import { Router } from '@angular/router';
+import {FormField, FormFieldType} from '../../../../shared/types/fields';
 
 function url(field: any, options?: { message?: string }) {
   validate(field, ({value}) => {
@@ -50,41 +50,41 @@ export class ArtistForm {
     imageUrl: '',
   });
 
-  artistField: ArtistField[] = [
+  artistField: FormField<ArtistFormDto>[] = [
     {
       label: 'Название',
       value: 'title',
-      type: ArtistFieldType.TEXT,
+      type: FormFieldType.TEXT,
       placeholder: 'Название'
     },
     {
       label: 'Фото',
       value: 'imageUrl',
-      type: ArtistFieldType.TEXT,
+      type: FormFieldType.TEXT,
       placeholder: 'URL'
     },
     {
       label: 'Описание',
       value: 'description',
-      type: ArtistFieldType.TEXTAREA,
+      type: FormFieldType.TEXTAREA,
       placeholder: 'Описание'
     },
     {
       label: 'Жанры',
       value: 'genres',
-      type: ArtistFieldType.TEXTAREA,
+      type: FormFieldType.TEXTAREA,
       placeholder: 'Каждый жанр с новой строки'
     },
     {
       label: 'Страны',
       value: 'countries',
-      type: ArtistFieldType.TEXTAREA,
+      type: FormFieldType.TEXTAREA,
       placeholder: 'Каждая страна с новой строки'
     },
     {
       label: 'Города',
       value: 'cities',
-      type: ArtistFieldType.TEXTAREA,
+      type: FormFieldType.TEXTAREA,
       placeholder: 'Каждый город с новой строки'
     },
   ]

@@ -1,10 +1,11 @@
-import {Component, computed, inject, signal} from '@angular/core';
+import {Component, computed, Inject, inject, OnInit, PLATFORM_ID, signal} from '@angular/core';
 import {ArtistsService} from '../../services/artists.service';
 import {FormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {NotificationService} from '../../../notifications/services/notifications.service';
 import {tap} from 'rxjs';
 import {Artist} from '../../models/artist.model';
+import {isPlatformBrowser} from '@angular/common';
 
 
 @Component({
@@ -18,7 +19,7 @@ import {Artist} from '../../models/artist.model';
 })
 
 
-export class ArtistList {
+export class ArtistList implements OnInit {
   private _artistsService = inject(ArtistsService);
   artists = signal<Artist[]>([]);
   search = signal('');
@@ -30,8 +31,17 @@ export class ArtistList {
     )
   );
 
-  constructor(private notifications: NotificationService, private router: Router) {
-    this.getArtists()
+  constructor(
+    private notifications: NotificationService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+
+  }
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.getArtists()
+    }
   }
 
   onSearch(term: string) {

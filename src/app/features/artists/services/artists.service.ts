@@ -1,4 +1,4 @@
-import {map, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environment/environment';
@@ -11,7 +11,7 @@ export class ArtistsService {
   constructor(private http: HttpClient) {}
 
   findAll() {
-    return this.http.get<ArtistResponse[]>(environment.apiUrl + 'artist')
+    return this.http.get<ArtistResponse[]>(environment.apiUrl + 'artist', { withCredentials: true })
   }
   findById(id: number) {
     return this.http.get<ArtistResponse>(environment.apiUrl + 'artist/' + id)
