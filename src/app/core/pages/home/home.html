@@ -1,0 +1,54 @@
+<app-my-card class="max-w-100 mx-auto">
+  <form (submit)="onSubmit($event)" class="grid gap-4">
+    @for (field of loginFields; track field.value) {
+      <div>
+        <label
+          [for]="field.value"
+          class="block text-gray-700 text-sm font-bold mb-2"
+        >
+          {{field.label}}
+        </label>
+        @switch (field.type) {
+          @case ('text') {
+            <input
+              [field]="loginForm[field.value]!"
+              class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              [ngClass]="{
+                'border-red-500': loginForm[field.value]!().touched() && loginForm[field.value]!().invalid()
+              }"
+              [id]="field.value"
+              type="text"
+              [placeholder]="field.placeholder"
+            >
+          }
+          @case ('password') {
+            <input
+              [field]="loginForm[field.value]!"
+              class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              [ngClass]="{
+                'border-red-500': loginForm[field.value]!().touched() && loginForm[field.value]!().invalid()
+              }"
+              [id]="field.value"
+              type="password"
+              [placeholder]="field.placeholder"
+            >
+          }
+          @default {
+            <div>Неизвестное поле, обратитьесь в поддержку</div>
+          }
+        }
+
+        @if (loginForm[field.value]!().invalid() && loginForm[field.value]!().touched()) {
+          @for (error of loginForm[field.value]!().errors(); track error) {
+            <div class="mt-2 text-red-500">{{ error.message }}</div>
+          }
+        }
+      </div>
+    }
+    <div>
+      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Войти
+      </button>
+    </div>
+  </form>
+</app-my-card>
