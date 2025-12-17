@@ -46,25 +46,5 @@ export class Home {
   onSubmit(event: Event) {
     event.preventDefault();
     this._authService.login(this.loginModel())
-
-    /*
-    this._authService.refresh()
-      .subscribe({
-        next: (data: string) => {
-          console.log('refresh', data)
-        },
-        error: (err) => console.log('refresh', err),
-      })
-    setTimeout(() => {
-      this._authService.info()
-        .subscribe({
-          next: (data) => {
-            console.log('info', data)
-          },
-          error: (err) => console.log('info', err),
-        })
-    }, 500)
-
-    */
   }
 }

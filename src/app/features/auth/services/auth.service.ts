@@ -32,7 +32,8 @@ export class AuthService {
       })
   }
   refresh() {
-    return this.http.post(environment.apiUrl +'auth/refresh', {}, { withCredentials: true, responseType: 'text' })
+    return this.http.post(environment.apiUrl +'auth/refresh', {}, {
+      withCredentials: true, responseType: 'text' })
       .pipe(
         tap((token: string) => {
           this.setToken(token)
@@ -53,10 +54,14 @@ export class AuthService {
       })
   }
   logout() {
-    return this.http.get(environment.apiUrl +'auth/logout', { withCredentials: true })
-      .pipe(
-        tap(() => this.clearToken()),
-      );
+    return this.http.post(environment.apiUrl +'auth/logout', { withCredentials: true })
+      .subscribe({
+        next: (user) => {
+          this.clearToken()
+          this.clearUser()
+        },
+        error: (err) => console.log('logout', err),
+      })
   }
 
   saveUser(user: AuthResponse) {
@@ -75,5 +80,9 @@ export class AuthService {
   private clearToken() {
     localStorage.removeItem('access_token');
     this.accessToken.set(null);
+  }
+
+  private clearUser() {
+    this.user.set(null);
   }
 }

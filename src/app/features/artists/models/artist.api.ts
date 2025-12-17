@@ -8,8 +8,14 @@ export interface ArtistResponse {
   countries: string[];
   cities: string[];
   imageUrl: string;
+  totalLikes: string;
+  likedByMe: string;
 }
 
-export type ArtistCreateRequest = Omit<ArtistResponse, 'id'>;
+export interface ArtistLikeToggleResponse {
+  liked: boolean;
+}
 
-export type ArtistUpdateRequest = Omit<ArtistResponse, 'id'>;
+export type ArtistCreateRequest = Omit<ArtistResponse, 'id' | 'totalLikes' | 'likedByMe'>;
+
+export type ArtistUpdateRequest = Omit<ArtistResponse, 'id' | 'totalLikes' | 'likedByMe'>;

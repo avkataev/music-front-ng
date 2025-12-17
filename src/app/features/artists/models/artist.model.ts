@@ -8,4 +8,6 @@ export interface Artist {
   countries: string[];
   cities: string[];
   imageUrl: string;
+  totalLikes: string;
+  likedByMe: string;
 }

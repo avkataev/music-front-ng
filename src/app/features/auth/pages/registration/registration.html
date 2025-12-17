@@ -1,1 +1,54 @@
-<p>registration works!</p>
+<app-my-card class="max-w-100 mx-auto">
+  <form (submit)="onSubmit($event)" class="grid gap-4">
+    @for (field of registerFields; track field.value) {
+      <div>
+        <label
+          [for]="field.value"
+          class="block text-gray-700 text-sm font-bold mb-2"
+        >
+          {{field.label}}
+        </label>
+        @switch (field.type) {
+          @case ('text') {
+            <input
+              [field]="registerForm[field.value]!"
+              class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              [ngClass]="{
+                'border-red-500': registerForm[field.value]!().touched() && registerForm[field.value]!().invalid()
+              }"
+              [id]="field.value"
+              type="text"
+              [placeholder]="field.placeholder"
+            >
+          }
+          @case ('password') {
+            <input
+              [field]="registerForm[field.value]!"
+              class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              [ngClass]="{
+                'border-red-500': registerForm[field.value]!().touched() && registerForm[field.value]!().invalid()
+              }"
+              [id]="field.value"
+              type="password"
+              [placeholder]="field.placeholder"
+            >
+          }
+          @default {
+            <div>Неизвестное поле, обратитьесь в поддержку</div>
+          }
+        }
+
+        @if (registerForm[field.value]!().invalid() && registerForm[field.value]!().touched()) {
+          @for (error of registerForm[field.value]!().errors(); track error) {
+            <div class="mt-2 text-red-500">{{ error.message }}</div>
+          }
+        }
+      </div>
+    }
+    <div>
+      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Зарегистрироваться
+      </button>
+    </div>
+  </form>
+</app-my-card>

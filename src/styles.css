@@ -33,3 +33,6 @@ body {
     transform: translateX(20px);
   }
 }
+button {
+  cursor: pointer;
+}

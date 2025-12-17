@@ -1,33 +1,32 @@
 import {Component, computed} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../../features/auth/services/auth.service';
+import {log} from 'node:util';
+
+
+interface RouteItem {
+  label: string;
+  value?: string;
+  class?: string
+  action?: () => void;
+}
 
 @Component({
   selector: 'app-sidebar',
-  imports: [
-    RouterLink,
-  ],
+  standalone: true,
+  imports: [RouterLink],
   templateUrl: './sidebar.html',
 })
 export class Sidebar {
-  constructor(public auth: AuthService) {
-
+  constructor(public auth: AuthService, private router: Router) {
   }
 
-  baseRoutes = [
-    {
-      label: 'Главная',
-      value: '/',
-      class: ''
-    },
-    {
-      label: 'Исполнители',
-      value: '/artists',
-      class: ''
-    },
-  ]
-  routes = computed(() => {
+  baseRoutes: RouteItem[] = [
+    {label: 'Главная', value: '/'},
+    {label: 'Исполнители', value: '/artists'},
+  ];
 
+  routes = computed<RouteItem[]>(() => {
     if (this.auth.isAuthenticated()) {
       const user = this.auth.user();
 
@@ -40,8 +39,11 @@ export class Sidebar {
         },
         {
           label: 'Выход',
-          value: '/logout',
           class: '',
+          action: async () => {
+            this.auth.logout()
+            await this.router.navigate(['/'])
+          },
         },
       ];
     }
@@ -50,15 +52,13 @@ export class Sidebar {
       ...this.baseRoutes,
       {
         label: 'Вход',
-        value: '/login',
+        value: '/',
         class: 'ml-auto',
       },
       {
         label: 'Регистрация',
         value: '/register',
-        class: '',
       },
     ];
-    }
-  )
+  });
 }

@@ -2,7 +2,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environment/environment';
-import {ArtistCreateRequest, ArtistResponse, ArtistUpdateRequest} from '../models/artist.api';
+import {ArtistCreateRequest, ArtistLikeToggleResponse, ArtistResponse, ArtistUpdateRequest} from '../models/artist.api';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,8 @@ export class ArtistsService {
   }
   update(id: number, artist: ArtistUpdateRequest): Observable<ArtistResponse> {
     return this.http.put<ArtistResponse>(environment.apiUrl + 'artist/' + id, artist)
+  }
+  toggleLike(id: number) {
+    return this.http.post<ArtistLikeToggleResponse>(environment.apiUrl + 'artist/'+ id + '/toggle-like', {})
   }
 }
